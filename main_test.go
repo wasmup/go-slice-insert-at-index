@@ -18,6 +18,12 @@ func insert2(a []int, index int, value int) []int {
 	a[index] = value                 // Step 3
 	return a
 }
+func insert3(a []int, index int, value int) []int {
+	a = append(a, 0)             // Step 1
+	copy(a[index+1:], a[index:]) // Step 2
+	a[index] = value             // Step 3
+	return a
+}
 func BenchmarkInsert(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		r = insert(a, 2, 42)
@@ -28,15 +34,16 @@ func BenchmarkInsert2(b *testing.B) {
 		r = insert2(a, 2, 42)
 	}
 }
-
-var (
-	n    = flag.Int("n", 32, "buffer length")
-	a, r []int
-)
-
-// We use TestMain to set up the buffer.
+func BenchmarkInsert3(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		r = insert3(a, 2, 42)
+	}
+}
 func TestMain(m *testing.M) {
 	flag.Parse()
 	a = make([]int, *n)
 	os.Exit(m.Run())
 }
+
+var n = flag.Int("n", 32, "buffer length")
+var a, r []int
