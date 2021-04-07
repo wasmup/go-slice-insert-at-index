@@ -37,4 +37,4 @@ go test -benchmem -bench . -args -n 1000000
 
 2: @icza: https://stackoverflow.com/a/46130603/8208215
 
-3: The Book: https://www.practical-go-lessons.com/chap-21-slices
+3: The Book (by Maximilien Andile): https://www.practical-go-lessons.com/chap-21-slices
